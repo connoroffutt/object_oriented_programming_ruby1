@@ -1,68 +1,106 @@
 class Rover
 
+  # def plateau(length, width)
+  # puts "Please indicate the length of the plateau you are on"
+  #  length = gets.chomp.to_i
+  # puts "please indicate the width of the plateau"
+  #  width = gets.chomp.to_i
+  # end
+
+
   def initialize(x, y, direction)
     @x = x
     @y = y
     @direction = direction
   end
 
-puts "please indicate the size of the plateau you are on"
+  def read_instructions(command)
+    command.chars.each do |input|
+      if input == "R"
+        r_turn
+      elsif input == "L"
+        l_turn
+      elsif input == "M"
+        move
+      else
+        puts "Error!!! Please input R, L, or M as they are the only accepted commands."
+      end
+    end
 
-puts "what is your starting position?"
-puts "please include the direction you are facing."
+    puts "The Rover is at #{@x}, #{@y}, facing #{@direction}"
 
-puts "Do you want to move or turn?"
-  def read_instruction
-    command = gets.chomp.downcase
-    if command == "move"
-      move
-    elsif command == "turn"
-      turn
+
+end
+
+  def r_turn
+    if @direction == "N"
+      @direction = "E"
+    elsif @direction == "E"
+      @direction = "S"
+    elsif @direction == "S"
+      @direction = "W"
+    elsif @direction == "W"
+      @direction = "N"
+    else
+      puts "ERROR!!"
+    end
   end
 
-      def move
-        puts "Do you want to move one space in the current direction? Y or N?"
-        gets.chomp.upcase
-            if "Y"
-              #if facing North y+=1
-              #if facing South y-=1
-              #if facing East x+=1
-              #if facing West x-=1
-            elsif "N"
-              #back to read instruction
-            else puts "Please select Y or N."
-      end
+  def l_turn
+    if @direction == "N"
+      @direction = "W"
+    elsif @direction == "W"
+      @direction = "S"
+    elsif @direction == "S"
+      @direction = "E"
+    elsif @direction == "E"
+      @direction = "N"
+    else
+      puts "ERROR!!"
+    end
+  end
 
-
-    elsif "turn"
-      def turn
-        puts "Which direction would you like to turn? L or R?"
-          gets.chomp.upcase
-            if "L"
-              if @direction == "N"
-                direction = "W"
-              elsif @direction == "W"
-                direction = "S"
-              elsif @direction == "S"
-                direction = "E"
-              elsif @direction == "E"
-                direction = "W"
-            elsif "R"
-              #if facing N turn E
-              #if facing E turn S
-              #if facing S turn W
-              #if facing W turn N
-            else puts "Please select L or R"
-      end
-    else puts "Please select move or turn."
-
+  def move
+    puts "inside method move"
+    if @direction == "N"
+      @y += 1
+    elsif @direction == "S"
+      @y -= 1
+    elsif @direction == "E"
+      @x += 1
+    elsif @direction == "W"
+      @x -= 1
+    else
+      puts "ERROR!!"
+    end
   end
 
 end
 
-connor.Rover.new(0,0, "N")
 
-puts "please input the entirety of your rover's movement"
-puts "to turn the rover left please input 'L', to turn the rover right please input 'R'"
-puts "to move the rover one space in the direction it is facing please input 'M'"
-puts ""
+puts "what is your rover's starting position on the X axis"
+x = gets.chomp.to_i
+puts "what is your rover' starting position on the Y axis"
+y = gets.chomp.to_i
+puts "what direction are you facing (N/E/S/W)?"
+direction = gets.chomp.upcase
+puts "your rover is currently at #{x}, #{y} and it is facing #{direction}"
+
+
+
+
+puts "Please input the entirety of your rover's movements"
+puts "To turn the rover left input 'L'."
+puts "To turn the rover right input 'R'."
+puts "To move the rover one space in the direction"
+puts "you are facing input 'M'"
+puts "please input all of your desired instructions"
+puts "then press Enter"
+
+instruction = gets.chomp.upcase
+
+# puts "The rover is at location #{x} by #{y}, facing #{direction}"
+
+
+connor_rover = Rover.new(x, y, direction)
+connor_rover.read_instructions(instruction)
