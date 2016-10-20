@@ -12,6 +12,9 @@ class Cat
     "#{@name} likes to eat at #{@meal_time.strftime("%l%p")}"
   end
 
+  def meow
+      "My name is #{@name} and i eat #{@preferred_food} at #{@meal_time.strftime("%l%p")}"
+  end
 
 end
 
@@ -19,5 +22,5 @@ end
   tina = Cat.new('Tina','Duck',Time.new(2016,10,20,17))
   jorge = Cat.new('Jorge','Salmon',Time.new(2016,10,20,18))
 
-    puts tina.meal_time
-    puts jorge.meal_time
+    puts tina.meow
+    puts jorge.meow
